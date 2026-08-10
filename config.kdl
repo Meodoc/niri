@@ -482,6 +482,7 @@ binds {
     Mod+E { spawn "nautilus"; }
     Mod+S { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
     Mod+M { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
+    Mod+Shift+E { spawn-sh "alacritty -e yazi"; }
     
     Mod+Shift+Q { show-hotkey-overlay; }
 
@@ -593,7 +594,8 @@ binds {
     // ...
 
     // And you can also move a whole workspace to another monitor:
-    // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
+    Mod+Shift+Ctrl+Alt+H  { move-workspace-to-monitor-left; }
+    Mod+Shift+Ctrl+Alt+L  { move-workspace-to-monitor-right; }
     // ...
 
     Mod+Page_Down      { focus-workspace-down; }
@@ -767,7 +769,7 @@ binds {
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
-    Mod+Shift+E { quit; }
+    // Mod+Shift+E { quit; }
     Ctrl+Alt+Delete { quit; }
 
     // Powers off the monitors. To turn them back on, do any input like
