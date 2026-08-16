@@ -387,7 +387,8 @@ layer-rule {
         xray false
     }
 
-    baba-is-float true
+    // funny floating thing
+    //baba-is-float true
 }
 
 
