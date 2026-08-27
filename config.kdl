@@ -304,8 +304,8 @@ layout {
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
-spawn-at-startup "qs" "-c" "noctalia-shell"
-// spawn-at-startup "noctalia"
+//spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "noctalia"
 spawn-at-startup "systemctl" "--user" "start" "niri-floating-listener.service"
 spawn-at-startup "lxqt-policykit-agent"
 
@@ -392,6 +392,22 @@ layer-rule {
 }
 
 
+// Noctalia v5
+// Floating settings
+window-rule {
+  match app-id="dev.noctalia.Noctalia"
+  open-floating true
+  default-column-width { fixed 1080; }
+  default-window-height { fixed 920; }
+}
+
+// Wallpaper in overview backdrop
+layer-rule {
+  match namespace="^noctalia-backdrop"
+  place-within-backdrop true
+}
+
+// Noctalia v4
 // Noctalia native transparency
 layer-rule {
     match namespace="^noctalia-(background|launcher-overlay|dock)-.*$"
@@ -482,17 +498,29 @@ binds {
     Mod+Z { spawn "zeditor"; }
     Mod+Shift+Z { spawn "zotero"; }
     Mod+E { spawn "nautilus"; }
-    Mod+S { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
-    Mod+M { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
+    // Noctalia v4
+    //Mod+S { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
+    //Mod+M { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
+    // Noctalia v5
+    Mod+S { spawn-sh "noctalia msg settings-toggle"; }
+    //Mod+M { spawn-sh ""; }
     Mod+Shift+E { spawn-sh "alacritty -e yazi"; }
-    
+
     Mod+Shift+Q { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    // Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+Shift+D hotkey-overlay-title="Run Application Launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+
+    // Noctalia v4
+    //Mod+Shift+D hotkey-overlay-title="Run Application Launcher" {
+    //    spawn-sh "qs -c noctalia-shell ipc call launcher toggle";
+    //}
+    // Noctalia v5
+    Mod+Shift+D hotkey-overlay-title="Run Application Launcher" {
+        spawn-sh "noctalia msg panel-toggle launcher";
+    }
+
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen & Power off Monitors" {
     //     spawn-sh "qs -c noctalia-shell ipc call lockScreen lock && sleep 2 && niri msg action power-off-monitors";
@@ -512,14 +540,22 @@ binds {
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
     // "-l 1.0" limits the volume to 100%.
+
+    // Default
     // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
     // XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
     // XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    // XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteInput"; }
+    // Noctalia v4
+    // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
+    // XF86AudioLowerVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
+    // XF86AudioMute        allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }
+    // XF86AudioMicMute     allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteInput"; }
+
+    // Noctalia v5
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "noctalia msg mic-mute"; }
 
     // Example media keys mapping using playerctl.
     // This will work with any MPRIS-enabled media player.
@@ -531,10 +567,15 @@ binds {
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
     // but you need to manually put each argument in separate "" quotes.
+    // Default
     // XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     // XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
-    XF86MonBrightnessUp    allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness increase"; }
-    XF86MonBrightnessDown  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
+    // Noctalia v4
+    // XF86MonBrightnessUp    allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness increase"; }
+    // XF86MonBrightnessDown  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
+    // Noctalia v5
+    XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "noctalia msg brightness-down"; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
