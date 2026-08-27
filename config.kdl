@@ -528,9 +528,15 @@ binds {
     // Super+Alt+L hotkey-overlay-title="Lock the Screen & Power off Monitors" {
     //     spawn-sh "qs -c noctalia-shell ipc call lockScreen lock && sleep 2 && qs -c noctalia-shell ipc call monitors off";
     // }
+    // Noctalia v4
+    //Super+Alt+L hotkey-overlay-title="Lock the Screen & Power off Monitors" {
+    //    spawn-sh "~/.local/bin/niri-lock-and-off-v4";
+    //}
+    // Noctalia v5
     Super+Alt+L hotkey-overlay-title="Lock the Screen & Power off Monitors" {
-        spawn-sh "~/.local/bin/niri-lock-and-off";
+        spawn-sh "~/.local/bin/niri-lock-and-off-v5";
     }
+
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
     // For example, this is a standard bind to toggle the screen reader (orca).
