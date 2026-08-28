@@ -578,8 +578,10 @@ binds {
     // XF86MonBrightnessUp    allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness increase"; }
     // XF86MonBrightnessDown  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
     // Noctalia v5
-    XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "noctalia msg brightness-up"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "noctalia msg brightness-down"; }
+    XF86MonBrightnessUp    allow-when-locked=true { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown  allow-when-locked=true { spawn-sh "noctalia msg brightness-down"; }
+    XF86KbdBrightnessUp    allow-when-locked=true { spawn-sh "noctalia msg keyboard-backlight-up"; }
+    XF86KbdBrightnessDown  allow-when-locked=true { spawn-sh "noctalia msg keyboard-backlight-down"; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
