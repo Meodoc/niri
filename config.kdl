@@ -399,7 +399,7 @@ layer-rule {
 // Noctalia publishes blur regions automatically when ext-background-effects is available.
 // Disable xray on all our surfaces so it looks more realistic.
 layer-rule {
-    match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+    match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|osd)$"
     background-effect {
         xray false
     }
