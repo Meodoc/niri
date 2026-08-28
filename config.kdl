@@ -348,34 +348,27 @@ animations {
 // Find more information on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Window-Rules
 
-// Rounded corners for all windows
+// Rules for all windoes
 window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
+
+    draw-border-with-background false
+
+    background-effect {
+        blur true
+        xray false
+    }
 }
 
-// Transparency for non-active windows
+// Different transparencies for active/non-active windows
 window-rule {
     match is-active=false
     opacity 0.92
-    draw-border-with-background false
-
-    background-effect {
-        blur true
-        xray false
-    }
 }
-
-// Transparency for active window
 window-rule {
     match is-active=true
     opacity 0.95
-    draw-border-with-background false
-
-    background-effect {
-        blur true
-        xray false
-    }
 }
 
 // Fuzzel native transparency
@@ -386,25 +379,39 @@ layer-rule {
         blur true
         xray false
     }
-
-    // funny floating thing
-    //baba-is-float true
 }
-
 
 // Noctalia v5
 // Floating settings
 window-rule {
-  match app-id="dev.noctalia.Noctalia"
-  open-floating true
-  default-column-width { fixed 1080; }
-  default-window-height { fixed 920; }
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 920; }
 }
 
 // Wallpaper in overview backdrop
 layer-rule {
-  match namespace="^noctalia-backdrop"
-  place-within-backdrop true
+    match namespace="^noctalia-backdrop"
+    place-within-backdrop true
+}
+
+// Noctalia publishes blur regions automatically when ext-background-effects is available.
+// Disable xray on all our surfaces so it looks more realistic.
+layer-rule {
+    match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+    background-effect {
+        xray false
+    }
+}
+
+// Enable blur on noctalia's window switcher and disable xray.
+layer-rule {
+    match namespace="noctalia-window-switcher"
+    background-effect {
+        blur true
+        xray false
+    }
 }
 
 // Noctalia v4
@@ -415,15 +422,6 @@ layer-rule {
         xray false
     }
 }
-
-// Tying to make bar background transparent
-/-layer-rule {
-    match namespace="^noctalia-background-.*$"
-    background-effect {
-        blur false
-    }
-}
-
 
 // For noctalia wallpaper on overview
 layer-rule {
