@@ -518,6 +518,12 @@ binds {
     Mod+Shift+D hotkey-overlay-title="Run Application Launcher" {
         spawn-sh "noctalia msg panel-toggle launcher";
     }
+    Mod+Ctrl+B hotkey-overlay-title="Toggle default bar (current monitor)" {
+        spawn-sh "noctalia msg bar-toggle $(niri msg --json focused-output | jq -r .name)";
+    }
+    Mod+Alt+B hotkey-overlay-title="Toggle default bar (all monitors)" {
+        spawn-sh "noctalia msg bar-toggle";
+    }
 
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen & Power off Monitors" {
