@@ -308,6 +308,7 @@ layout {
 spawn-at-startup "noctalia"
 spawn-at-startup "systemctl" "--user" "start" "niri-floating-listener.service"
 spawn-at-startup "lxqt-policykit-agent"
+spawn-at-startup "/home/lukas/.local/bin/noctalia-widgets-autohide-v2"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
