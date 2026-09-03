@@ -535,11 +535,11 @@ binds {
     // }
     // Noctalia v4
     //Super+Alt+L hotkey-overlay-title="Lock the Screen & Power off Monitors" {
-    //    spawn-sh "~/.local/bin/niri-lock-and-off-v4";
+    //    spawn-sh "~/.local/bin/noctalia-lock-and-off-v4";
     //}
     // Noctalia v5
     Super+Alt+L hotkey-overlay-title="Lock the Screen & Power off Monitors" {
-        spawn-sh "~/.local/bin/niri-lock-and-off-v5";
+        spawn-sh "~/.local/bin/noctalia-lock-and-off-v5";
     }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
