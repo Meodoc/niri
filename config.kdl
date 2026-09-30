@@ -96,7 +96,7 @@ output "eDP-1" {
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "1920x1080@120.030"
+    mode "1920x1200@60.003"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
     scale 1
@@ -117,15 +117,29 @@ output "eDP-1" {
     position x=0 y=0
 }
 
-// Work monitor
+// Home monitor (acer)
+output "DP-1" {
+    position x=-1920 y=120
+}
+
+// Work monitor (wide screen)
 output "DP-2" {
     // transform "90"
     position x=-1920 y=-240
 }
 
-// Home monitor (acer)
-output "DP-1" {
-    position x=-1920 y=120
+// Work montitor (multi-monitor) left
+output "DP-7" {
+    mode "2560x1440@120.000"
+    scale 1
+    position x=-2560 y=-124
+}
+
+// Work montitor (multi-monitor) right
+output "DP-9" {
+    mode "2560x1440@120.000"
+    scale 1
+    position x=1920 y=-124
 }
 
 // Settings that influence how windows are positioned and sized.
